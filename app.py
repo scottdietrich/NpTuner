@@ -97,9 +97,18 @@ with st.sidebar:
     )
 
     st.header("Fabrication")
-    sub_key = st.selectbox("Substrate", list(SUBSTRATE_PRESETS.keys()), index=2)
+    sub_keys = list(SUBSTRATE_PRESETS.keys())
+    sub_key = st.selectbox(
+        "Substrate", sub_keys,
+        index=sub_keys.index("Fused silica")
+        if "Fused silica" in sub_keys else 0,
+    )
     sub = SUBSTRATE_PRESETS[sub_key]
-    metal_key = st.selectbox("Metal", list(METAL_PRESETS.keys()), index=0)
+    metal_keys = list(METAL_PRESETS.keys())
+    metal_key = st.selectbox(
+        "Metal", metal_keys,
+        index=metal_keys.index("Au") if "Au" in metal_keys else 0,
+    )
     sigma = METAL_PRESETS[metal_key]
     t_m_nm = st.slider("Metal thickness t_m (nm)", 50, 500, 200, 10)
     t_m = t_m_nm * 1e-9
@@ -203,10 +212,11 @@ def _build_case(label, is_meander, fab_W_min, metal_sigma, metal_t_m):
     }
 
 
-# PCB = Cu, 35 µm default for PCB trace.
+# PCB = PCB-grade Cu, 35 µm default for PCB trace (1 oz electroplated Cu;
+# σ ≈ 0.5 σ_Cu,ideal — see paper §5 calibration constants).
 # litho = user metal selection (default Au thin film).
-pcb_t_m = 35e-6                      # 1 oz Cu
-pcb_sigma = METAL_PRESETS["Cu"]
+pcb_t_m = 35e-6
+pcb_sigma = METAL_PRESETS.get("Cu (PCB-grade)", METAL_PRESETS["Cu"])
 litho_t_m = t_m                      # sidebar value
 litho_sigma = sigma                  # sidebar value
 

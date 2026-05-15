@@ -17,17 +17,26 @@ C_LIGHT = 2.99792458e8         # speed of light [m/s]
 
 
 # --- Substrate and metal presets ----------------------------------------
+# Values follow Dietrich & Solodovnyk, "CPW Transmission-Line Survey" v10,
+# Table 2 (Substrate Dielectric Loss Reference) at 10 GHz.
 SUBSTRATE_PRESETS = {
-    "FR4":          {"eps_r": 4.4,  "tan_delta": 2.0e-2},
-    "HR-Si":        {"eps_r": 11.7, "tan_delta": 1.0e-3},
-    "Fused silica": {"eps_r": 3.8,  "tan_delta": 1.0e-4},
-    "Sapphire":     {"eps_r": 9.4,  "tan_delta": 3.0e-5},
+    "Fused silica":      {"eps_r": 3.8,  "tan_delta": 1.0e-4},
+    "Rogers RO4003C":    {"eps_r": 3.6,  "tan_delta": 2.7e-3},
+    "FR4":               {"eps_r": 4.4,  "tan_delta": 2.0e-2},
+    "Sapphire (Al2O3)":  {"eps_r": 9.4,  "tan_delta": 1.0e-4},
+    "RT/Duroid 6010":    {"eps_r": 10.2, "tan_delta": 2.3e-3},
+    "HR-Si":             {"eps_r": 11.7, "tan_delta": 2.0e-3},
+    "HR-GaAs":           {"eps_r": 12.9, "tan_delta": 4.0e-3},
 }
 
+# Conductivities in S/m.  "Cu (PCB-grade)" reflects the ~50 % reduction in
+# σ typical of electrodeposited copper laminates (paper Sec. 5: PCB-grade
+# Cu has σ ≈ 0.5 σ_ideal, giving R_s a √2 boost over drawn-wire Cu).
 METAL_PRESETS = {
-    "Cu": 58.0e6,
-    "Au": 41.0e6,
-    "Al": 3.77e7,
+    "Au":             41.0e6,
+    "Cu":             58.0e6,
+    "Cu (PCB-grade)": 29.0e6,
+    "Al":             37.7e6,
 }
 
 
