@@ -92,8 +92,13 @@ DESIGNS = [
          tm=0.215e-6, tm_sig=0.02e-6,
          eps_r=11.7, eps_r_sig=0.3, tan_d=2.0e-3,
          Z0_sig=2.0, sigma_metal=Au, Rs_override=0.117),
+    # Optimised (this work): L re-derived for the FULL Pucel-Heinrich form
+    # so that alpha_c L = 1.000 Np by construction (cf. tools/find_optimum.py
+    # --mode full-coverage --W_um 100).  L moves 5.5 mm -> 2.96 mm; the
+    # (L/W)_opt calibration becomes 29.6 (was 55) and A_c = 0.138 Np/Ohm
+    # (was 0.0741).  alpha_d L drops in proportion to ~0.04 mNp.
     dict(name="Optimised (this work)", f=10e9,
-         W=100e-6, S=None,         L=5.5e-3, L_sig=0.0,
+         W=100e-6, S=None,         L=2.958e-3, L_sig=0.05e-3,
          tm=0.100e-6, tm_sig=0.005e-6,
          eps_r=3.8, eps_r_sig=0.02, tan_d=1.0e-4,
          Z0_sig=2.0, sigma_metal=Au, Rs_override=0.246),
